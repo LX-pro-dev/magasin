@@ -1,10 +1,12 @@
 package com.gauthier.magasin.services.impl;
 
 import com.gauthier.magasin.models.Commande;
+import com.gauthier.magasin.models.Produit;
 import com.gauthier.magasin.repositories.CommandeRepository;
 import com.gauthier.magasin.services.CommandeService;
 
 import java.util.List;
+import java.util.Set;
 
 public class CommandeServiceImpl implements CommandeService {
     private CommandeRepository commandeRepository;
@@ -37,4 +39,11 @@ public class CommandeServiceImpl implements CommandeService {
     public Commande update(Commande commande) {
         return this.commandeRepository.save(commande);
     }
+
+    @Override
+    public Set<Produit> findProduitsByCommandeId(Long id) {
+        return this.commandeRepository.findCommandeById(id).getProduits();
+    }
+
+
 }

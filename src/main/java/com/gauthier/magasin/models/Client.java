@@ -20,6 +20,6 @@ public class Client {
     @Column(name = "prenom")
     private String prenom;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private Set<Commande> commandes;
 }

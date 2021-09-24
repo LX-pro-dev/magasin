@@ -3,12 +3,12 @@ package com.gauthier.magasin.controllers;
 import com.gauthier.magasin.models.Produit;
 import com.gauthier.magasin.services.ProduitService;
 import lombok.Data;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @Data
 @RequestMapping("produit")
 public class ProduitController {
@@ -18,23 +18,26 @@ public class ProduitController {
         this.produitService = produitService;
     }
 
-    public List<Produit> findAll() {
-        return produitService.findAll();
-    }
+    @GetMapping
+    public List<Produit> findAll() { return produitService.findAll();  }
 
-    public Produit create(Produit produit) {
+    @PostMapping
+    public Produit create(@RequestBody Produit produit) {
         return produitService.create(produit);
     }
 
-    public Produit findProduitById(Long id) {
+    @GetMapping("{id}")
+    public Produit findProduitById(@PathVariable Long id) {
         return produitService.findProduitById(id);
     }
 
-    public void delete(Long id) {
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id) {
         produitService.delete(id);
     }
 
-    public Produit update(Produit produit) {
+    @PutMapping
+    public Produit update(@RequestBody Produit produit) {
         return produitService.update(produit);
     }
 }

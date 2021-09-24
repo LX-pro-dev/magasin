@@ -20,10 +20,7 @@ public class Produit {
     @Column(name= "prix")
     private Integer prix;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Categorie> category;
-
-    @ManyToMany(mappedBy = "produits")
-    private Set<Commande> commandes;
+    @ManyToOne
+    private Categorie categorie;
 
 }

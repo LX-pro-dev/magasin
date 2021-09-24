@@ -1,13 +1,13 @@
 package com.gauthier.magasin.controllers;
 
 import com.gauthier.magasin.models.Commande;
+import com.gauthier.magasin.models.Produit;
 import com.gauthier.magasin.services.CommandeService;
 import lombok.Data;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @Data
@@ -20,23 +20,31 @@ public class CommandeController {
         this.commandeService = commandeService;
     }
 
-    public List<Commande> findAll() {
-        return commandeService.findAll();
-    }
+    @GetMapping
+    public List<Commande> findAll() {  return commandeService.findAll();  }
 
-    public Commande create(Commande commande) {
+    @PostMapping
+    public Commande create(@RequestBody Commande commande) {
         return commandeService.create(commande);
     }
 
-    public Commande findCommandeById(Long id) {
+    @GetMapping("{id}")
+    public Commande findCommandeById(@PathVariable Long id) {
         return commandeService.findCommandeById(id);
     }
 
-    public void delete(Long id) {
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id) {
         commandeService.delete(id);
     }
 
-    public Commande update(Commande commande) {
+    @PutMapping
+    public Commande update(@RequestBody Commande commande) {
         return commandeService.update(commande);
+    }
+
+    @GetMapping("{id}/commandes")
+    public Set<Produit> findProduitsByCommandeId(@PathVariable Long id) {
+        return this.commandeService.findProduitsByCommandeId(id);
     }
 }

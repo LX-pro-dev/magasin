@@ -15,14 +15,8 @@ public class Commande {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name= "client_id", referencedColumnName = "id")
     private Client client;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="commande_has_produits",
-            joinColumns = @JoinColumn(name="commande_id"),
-            inverseJoinColumns = @JoinColumn(name="produit_id")
-    )
+    @ManyToMany
     private Set<Produit> produits;
 }
